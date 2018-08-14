@@ -1,1 +1,2 @@
-# linux
+# initial scripts
+
