@@ -36,17 +36,17 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -173,8 +173,8 @@ bar {
 for_window [class="^.*"] border pixel 2
 
 # Set inner/outer gaps
-gaps inner 4
-gaps outer 1
+gaps inner 6
+gaps outer 3
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -227,7 +227,7 @@ mode "$mode_gaps_outer" {
 }
 
 
-set $Locker i3lockmore --blur 10 && sleep 1
+set $Locker i3lockmore --blur 10 --pixelate 30 && sleep 1
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -245,13 +245,18 @@ mode "$mode_system" {
 
 bindsym $mod+Pause mode "$mode_system"
 
+bindsym $mod+l exec --no-startup-id $Locker, mode "default"
+
+bindsym $mod+F1 exec --no-startup-id firefox
+
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id dunst
 
 for_window [class="Pamac-manager"] floating enable
-for_window [class="ViberPC"] floating enable
 for_window [class="Pcmanfm"] floating enable
 for_window [class="Putty"] floating enable
 for_window [class="Ulauncher"] floating enable
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id ulauncher --hide-window
+exec --no-startup-id imwheel -k -b "45"
+
